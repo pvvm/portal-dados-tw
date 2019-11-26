@@ -13,15 +13,25 @@
         class="form-control"
         id="exampleInputEmail1"
         aria-describedby="emailHelp">
-      <small id="emailHelp" class="form-text text-muted">deixar em branco para não restringir usuário</small>
+      <small id="emailHelp" class="form-text text-muted">*deixar em branco para não restringir usuário</small>
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input class="form-control" id="exampleInputPassword1">
+      <label for="exampleFormControlTextarea1">Palavras-chave (Separadas por vírgula)</label>
+      <textarea
+        placeholder="palavra1,palavra2,palavra3,palavra4"
+        class="form-control"
+        id="exampleFormControlTextarea1"
+        rows="3"></textarea>
+      <small id="palavraHelp" class="form-text text-muted">* tweets com qualquer uma dessas palavras serão retornados</small>
     </div>
-    <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Grupos de palavras-chave (Palavras separadas por vírgula, grupos separados por &)</label>
+      <textarea
+        placeholder='palavra1_grupo1,palavra2_grupo1&palavra1_grupo2,palavra2_grupo2'
+        class="form-control"
+        id="exampleFormControlTextarea1"
+        rows="3"></textarea>
+      <small id="groupHelp" class="form-text text-muted">* tweets só serão retornados se contiverem todas palavras do grupo</small>
     </div>
     <button type="submit" class="btn btn-primary">Buscar</button>
   </form>

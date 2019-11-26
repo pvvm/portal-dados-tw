@@ -2,10 +2,13 @@
 {% block content %}
   <h3>Artigos Científicos</h3>
   <ul class="list-group">
+    {% for article in articles %}
     <li class="list-group-item">
-      <a href="https://www.maven.com.br/wp-content/uploads/2019/05/12-o-guia-completo-sobre-jornalismo-de-dados.pdf">
-        O GUIA COMPLETO SOBRE JORNALISMO DE DADOS
+      <a href="{{article.url}}">
+        {{ article.title }}
       </a>
+      <p>Autores: {{ article.authors }}</p>
     </li>
+    {% endfor %}
   </ul>
 {% endblock %}

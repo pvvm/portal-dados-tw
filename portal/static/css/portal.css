@@ -1,7 +1,8 @@
 .page-header {
-  background-color: #C25100;
+  background-color: rgb(20, 52, 108) !important;
   margin-top: 0;
-  padding: 15px 15px 15px 40px;
+  padding: 15px 15px 15px 50px;
+  border-bottom: 1px solid gray;
 }
 
 .page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
@@ -11,7 +12,7 @@
 }
 
 .content {
-  margin-left: 40px;
+  margin: 40px;
 }
 
 .date {

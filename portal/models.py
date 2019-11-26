@@ -7,3 +7,18 @@ class Tweet(models.Model):
 
     def __str__(self):
       return self.text
+
+class Article(models.Model):
+    url = models.TextField()
+    title = models.TextField()
+    authors = models.TextField()
+
+    def __str__(self):
+      return self.title
+
+class Reference(models.Model):
+    url = models.TextField()
+    title = models.TextField()
+
+    def __str__(self):
+      return self.title

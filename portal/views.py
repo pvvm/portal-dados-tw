@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Tweet
+from .models import Tweet, Article, Reference
 import requests
 # Create your views here.
 def tweets_list(request):
@@ -13,10 +13,12 @@ def home(request):
   return render(request, 'portal/home.html')
 
 def articles(request):
-  return render(request, 'portal/articles.html')
+  articles = Article.objects.all()
+  return render(request, 'portal/articles.html', {'articles': articles})
 
 def portals(request):
-  return render(request, 'portal/portals.html')
+  references = Reference.objects.all()
+  return render(request, 'portal/portals.html', {'references': references})
 
 def tweets_search(request):
   return render(request, 'portal/tweets_search.html')
