@@ -1,20 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Portal de dados</title>
-</head>
-<body>
-  <div>
-      <h1><a href="/">Portal de dados</a></h1>
-  </div>
-  <h2>Tweets</h2>
+{% extends 'portal/index.html' %}
+{% block content %}
+  <h2>Resultado da busca no Twitter</h2>
+  <h3>Tweets</h2>
   {% for tweet in tweets %}
   <div style="margin-bottom: 20px;">
     {{ tweet }}
   </div>
   {% endfor %}
-</body>
-</html>
+{% endblock %}

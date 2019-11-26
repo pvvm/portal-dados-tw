@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/portal.css' %}">
+  <title>Portal Jornalimo de dados</title>
+</head>
+<body>
+  <div class="page-header">
+    <h1><a href="/">Portal Jornalismo de dados</a></h1>
+  </div>
+  <div class="content container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="/">
+        <img src="data:image/png;base64,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" width="30" height="30" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link active" href="/">Home<span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link" href="/articles">Artigos Científicos</a>
+          <a class="nav-item nav-link" href="/portals">Portais e Reportagens</a>
+          <a class="nav-item nav-link" href="/search">Busca Twitter</a>
+          <a class="nav-item nav-link" href="/list">Resultados da busca</a>
+        </div>
+      </div>
+    </nav>
+    <div class="row">
+      <div class="col-md-10">
+        {% block content %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</body>
+</html>
