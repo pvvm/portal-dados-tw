@@ -1,7 +1,11 @@
 from django.shortcuts import render
+from twitterscraper import query_tweets
+from datetime import date
 from .models import Tweet, Article, Reference
 
 import requests
+
+
 def tweets_list(request):
   return render(request, 'portal/tweets_list.html', {'tweets': ['Realize uma busca para verificar os resultados!']})
 
@@ -18,22 +22,23 @@ def portals(request):
 
 def tweets_search(request):
   if request.method == 'POST':
-    form = []
     key_groups = []
     username = request.POST.get('username')
-    key_groups_aux = request.POST.get('group').split('&')
-    for group in key_groups_aux:
+    word_group = request.POST.get('group').split('&')
+
+    for group in word_group:
       key_groups.append(group.split(','))
+
     start_date = request.POST.get('startDate').split('-')
     end_date = request.POST.get('endDate').split('-')
-    key_words = request.POST.get('words').split(',')
-    query = f'username={username}&startDay={start_date[0]}&startMonth={start_date[1]}&startYear={start_date[2]}'
-    query += f'&endDay={end_date[0]}&endMonth={end_date[1]}&endYear={end_date[2]}'
-    query += f'&query={query_constructor(key_words, key_groups)}'
-    response = requests.get(f'http://localhost:3333/?{query}')
+    keywords = request.POST.get('words').split(',')
+
+    begin_date = f'{start_date[2]}-{start_date[1]}-{start_date[0]}'
+    end_date = f'{end_date[2]}-{end_date[1]}-{end_date[0]}'
+
     tweets = []
-    for tweet in response.json():
-      tweets.append(tweet['text'])
+    for tweet in query_tweets(query=f"{query_constructor(keywords, key_groups)} from:{username}", limit=40, poolsize=1, begindate=date.fromisoformat(begin_date), enddate=date.fromisoformat(end_date)):
+      tweets.append(tweet.text)
     return render(request, 'portal/tweets_list.html', {'tweets': tweets})
   else:
     return render(request, 'portal/tweets_search.html')
