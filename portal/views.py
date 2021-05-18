@@ -1,88 +1,24 @@
 # Importando as bibliotecas necessárias
 from django.shortcuts import render
-import snscrape.modules.twitter as sntwitter
 from datetime import date
 from .models import Tweet, Article, Reference
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-import requests
-
-
-def tweets_list(request):
-  return render(request, 'portal/tweets_list.html', {'tweets': ['Realize uma busca para verificar os resultados!']})
-
 def home(request):
   return render(request, 'portal/home.html')
 
 def articles(request):
   articles = Article.objects.all()
-  return render(request, 'portal/articles.html', {'articles': articles})
+  return render(request, 'portal/articles.html')
 
 def portals(request):
   references = Reference.objects.all()
-  return render(request, 'portal/portals.html', {'references': references})
+  return render(request, 'portal/portals.html')
 
 def tweets_search(request):
-  if request.method == 'POST':
-    key_groups = []
-    # Recebo os dados enviados pelo usuário
-    username = request.POST.get('username')
-    start_date = request.POST.get('startDate').split('-')
-    end_date = request.POST.get('endDate').split('-')
-    type_search = request.POST.get('search')
-    num_search = request.POST.get('num')
-    keywords = request.POST.get('words').split(',')
-
-    # Evita que usuários deixem de preencher algo
-    if keywords == [''] or start_date == [''] or end_date == ['']:
-      return render(request, 'portal/tweets_search.html')
-
-    # Adapto a data no formato DD-MM-AAAA para AAAA-MM-DD
-    begin_date = f'{start_date[2]}-{start_date[1]}-{start_date[0]}'
-    end_date = f'{end_date[2]}-{end_date[1]}-{end_date[0]}'
-
-    num = len(keywords)
-    j = 0
-    # Crio a string que determina a raspagem a ser feita
-    search = ''
-    while num > j:
-      # Caso tenha usuário, defino que deve ser concatenado seu username
-      if username != '' and j == 0:
-        search = search + f'from:{username}'
-      # Concateno a primeira keyword
-      if j == 0:
-        search = search + f' {keywords[0]}'
-      # Concateno as demais keywords
-      else:
-        # Concateno com AND caso deseje tweets com todos as keywords
-        if type_search == 'all-kw':
-          search = search + f' AND {keywords[j]}'
-        # Concateno com OR caso deseje tweets com no mínimo uma keyword
-        else:
-          search = search + f' OR {keywords[j]}'
-      j += 1
-
-    # Concateno as datas de início e fim da busca
-    search = search+ f' since:{begin_date}' + f' until:{end_date}'
-
-    tweets = []
-    datas = []
-    # Realiza a busca definida anteriormente, se limitando com o número máximo de tweets
-    for i, tweet in enumerate(sntwitter.TwitterSearchScraper(search).get_items()):
-      if num_search != 'ilimitado' and i > int(num_search):
-        break
-      
-      # Recebe e formata a data do tweet
-      data = str(tweet.date).split()[0]
-      data = data.split('-')
-      data = f'{data[2]}-{data[1]}-{data[0]}'
-      tweets.append([data, tweet.content])
-
-    return render(request, 'portal/tweets_list.html', {'tweets': tweets})
-  else:
-    return render(request, 'portal/tweets_search.html')
+  return render(request, 'portal/tweets_search.html')
 
 def graphics(request):
   if request.method == 'POST':
@@ -109,7 +45,7 @@ def graphics(request):
         
         # Evita que o usuário preencha os dados de forma errada
         try:
-          data[i-1] = list(map(int, data[i-1]))
+          data[i-1] = list(map(float, data[i-1]))
         except:
           return render(request, 'portal/graphics.html')
 
